@@ -12,15 +12,12 @@ namespace CodeMonkey.CameraSystem {
         [SerializeField] private bool useEdgeScrolling = false;
         [SerializeField] private bool useDragPan = false;
         [SerializeField] private bool usePulseRotation = true;
-        [SerializeField] private bool useFOVzoom = false;
         [SerializeField] private float fieldOfViewMax = 50;
         [SerializeField] private float fieldOfViewMin = 10;
         [SerializeField] private float followOffsetMinY = 10f;
         [SerializeField] private float followOffsetMaxY = 50f;
         [SerializeField] private float generalSpeed = 1f , LshiftMultiplier = 2f;
-        [SerializeField] [Range(0f,10f)]private float keySpeedMultiplier, edgeScrollSpeedMultiplier, continuousRotationSpeedMultiplier, pulseRotationSpeedMultiplier, zoomSpeedMultiplier;
-        [SerializeField] [Range(0f, 10f)] private float Lshift_keySpeedMultiplier, Lshift_edgeScrollSpeedMultiplier, Lshift_continuousRotationSpeedMultiplier, Lshift_pulseRotationSpeedMultiplier, Lshift_zoomSpeedMultiplier;
-
+        [SerializeField] [Range(0f,5f)]private float keySpeedMultiplier = 0.5f, edgeScrollSpeedMultiplier, continuousRotationSpeedMultiplier, pulseRotationSpeedMultiplier, zoomSpeedMultiplier;
 
 
         private UnityEvent CameraBehavior;
@@ -43,11 +40,8 @@ namespace CodeMonkey.CameraSystem {
         }
 
 
-        private void Update() {
-
-            //HandleCameraZoom_MoveForward();
-            HandleCameraZoom_LowerY();
-
+        private void Update() 
+        {
             CameraBehavior.Invoke();
         }
 
@@ -59,6 +53,8 @@ namespace CodeMonkey.CameraSystem {
         {
             CameraBehavior = new UnityEvent();
             CameraBehavior.AddListener(HandleCameraMovement);
+            CameraBehavior.AddListener(HandleCameraZoom_LowerY);
+
 
             if (useEdgeScrolling)
             {
@@ -79,26 +75,18 @@ namespace CodeMonkey.CameraSystem {
             {
                 CameraBehavior.AddListener(HandleContinuousCameraRotation);
             }
-
-            //zoom behavior
-            if(useFOVzoom)
-            {
-                CameraBehavior.AddListener(HandleCameraZoom_FieldOfView);
-            }
-            else
-            {
-
-            }
         }
 
 
         private void HandleCameraMovement() {
             Vector3 inputDir = new Vector3(0, 0, 0);
+            float mvmSpeed = generalSpeed * keySpeedMultiplier;
+            if (Input.GetKey(KeyCode.LeftShift)) { mvmSpeed *= LshiftMultiplier; }
 
-            if (Input.GetKey(KeyCode.W)) inputDir.z = +1f;
-            if (Input.GetKey(KeyCode.S)) inputDir.z = -1f;
-            if (Input.GetKey(KeyCode.A)) inputDir.x = -1f;
-            if (Input.GetKey(KeyCode.D)) inputDir.x = +1f;
+            if (Input.GetKey(KeyCode.W)) inputDir.z = +mvmSpeed;
+            if (Input.GetKey(KeyCode.S)) inputDir.z = -mvmSpeed;
+            if (Input.GetKey(KeyCode.A)) inputDir.x = -mvmSpeed;
+            if (Input.GetKey(KeyCode.D)) inputDir.x = +mvmSpeed;
 
             Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
 
@@ -111,18 +99,19 @@ namespace CodeMonkey.CameraSystem {
             Vector3 inputDir = new Vector3(0, 0, 0);
 
             int edgeScrollSize = 20;
+            float edgeScrollSpeed = generalSpeed * edgeScrollSpeedMultiplier;
 
             if (Input.mousePosition.x < edgeScrollSize) {
-                inputDir.x = -1f;
+                inputDir.x = -edgeScrollSpeed;
             }
             if (Input.mousePosition.y < edgeScrollSize) {
-                inputDir.z = -1f;
+                inputDir.z = -edgeScrollSpeed;
             }
             if (Input.mousePosition.x > Screen.width - edgeScrollSize) {
-                inputDir.x = +1f;
+                inputDir.x = +edgeScrollSpeed;
             }
             if (Input.mousePosition.y > Screen.height - edgeScrollSize) {
-                inputDir.z = +1f;
+                inputDir.z = +edgeScrollSpeed;
             }
 
             Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
@@ -162,10 +151,10 @@ namespace CodeMonkey.CameraSystem {
 
         private void HandleContinuousCameraRotation() {
             float rotateDir = 0f;
+            float rotateSpeed = (generalSpeed * continuousRotationSpeedMultiplier)*100;
             if (Input.GetKey(KeyCode.Q)) rotateDir = +1f;
             if (Input.GetKey(KeyCode.E)) rotateDir = -1f;
 
-            float rotateSpeed = 100f;
             transform.eulerAngles += new Vector3(0, rotateDir * rotateSpeed * Time.deltaTime, 0);
         }
 
@@ -176,24 +165,7 @@ namespace CodeMonkey.CameraSystem {
             if (Input.GetKey(KeyCode.LeftShift)) { turnForce *= 2; }
             if (Input.GetKeyDown(KeyCode.Q)) pulseRotationTarget += new Vector3(0, turnForce, 0);
             if (Input.GetKeyDown(KeyCode.E)) pulseRotationTarget += new Vector3(0, -turnForce, 0);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(pulseRotationTarget), 5f * Time.deltaTime);
-
-
-        }
-
-        private void HandleCameraZoom_FieldOfView() {
-            if (Input.mouseScrollDelta.y > 0) {
-                targetFieldOfView -= 5;
-            }
-            if (Input.mouseScrollDelta.y < 0) {
-                targetFieldOfView += 5;
-            }
-
-            targetFieldOfView = Mathf.Clamp(targetFieldOfView, fieldOfViewMin, fieldOfViewMax);
-
-            float zoomSpeed = 10f;
-            cinemachineVirtualCamera.m_Lens.FieldOfView =
-                Mathf.Lerp(cinemachineVirtualCamera.m_Lens.FieldOfView, targetFieldOfView, Time.deltaTime * zoomSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(pulseRotationTarget), (generalSpeed * pulseRotationSpeedMultiplier) * Time.deltaTime);
         }
 
 
@@ -211,7 +183,6 @@ namespace CodeMonkey.CameraSystem {
             float zoomSpeed = 10f;
             cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset =
                 Vector3.Lerp(cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset, followOffset, Time.deltaTime * zoomSpeed);
-
         }
     }
 }
