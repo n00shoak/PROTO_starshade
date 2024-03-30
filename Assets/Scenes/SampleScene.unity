@@ -800,6 +800,15 @@ MonoBehaviour:
   Xoffset: 0
   Yoffset: 30
   Zoffset: -17.5
+  followOffsetMinY: 10
+  followOffsetMaxY: 50
+  generalSpeed: 1
+  LshiftMultiplier: 2
+  keySpeedMultiplier: 0.5
+  edgeScrollSpeedMultiplier: 0
+  continuousRotationSpeedMultiplier: 0
+  pulseRotationSpeedMultiplier: 5
+  zoomSpeedMultiplier: 0
 --- !u!114 &1856367564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,15 +841,6 @@ MonoBehaviour:
   useEdgeScrolling: 0
   useDragPan: 0
   usePulseRotation: 1
-  followOffsetMinY: 10
-  followOffsetMaxY: 50
-  generalSpeed: 1
-  LshiftMultiplier: 2
-  keySpeedMultiplier: 0.5
-  edgeScrollSpeedMultiplier: 1
-  continuousRotationSpeedMultiplier: 1
-  pulseRotationSpeedMultiplier: 5
-  zoomSpeedMultiplier: 1
 --- !u!1 &1922305941
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,10 +13,9 @@ public class SY_CameraSystem : MonoBehaviour
     [SerializeField] private bool useEdgeScrolling = false;
     [SerializeField] private bool useDragPan = false;
     [SerializeField] private bool usePulseRotation = true;
-    [SerializeField] private float followOffsetMinY = 10f;
-    [SerializeField] private float followOffsetMaxY = 50f;
-    [SerializeField] private float generalSpeed = 1f, LshiftMultiplier = 2f;
-    [SerializeField][Range(0f, 5f)] private float keySpeedMultiplier = 0.5f, edgeScrollSpeedMultiplier, continuousRotationSpeedMultiplier, pulseRotationSpeedMultiplier, zoomSpeedMultiplier;
+    private float followOffsetMinY , followOffsetMaxY;
+    private float generalSpeed, LshiftMultiplier;
+    private float keySpeedMultiplier, edgeScrollSpeedMultiplier, continuousRotationSpeedMultiplier, pulseRotationSpeedMultiplier, zoomSpeedMultiplier;
 
 
     private UnityEvent CameraBehavior;
@@ -32,12 +31,32 @@ public class SY_CameraSystem : MonoBehaviour
         MN_Cam = GetComponent<MN_CameraManager>();
         MN_Cam.CameraControls(this);
         followOffset = MN_Cam.cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
-
     }
 
     private void Start()
     {
+        ApplyStats();
+        Debug.Log($"C :{pulseRotationSpeedMultiplier}");
+
         UpdateCameraBehavior();
+    }
+
+    private void ApplyStats()
+    {
+        //get mouvement stats stored in the camera DATA script
+        List<float> currentPreset = MN_Cam.getStat();
+
+        followOffsetMinY = currentPreset[0];
+        followOffsetMaxY = currentPreset[1];
+        generalSpeed = currentPreset[2];
+        LshiftMultiplier = currentPreset[3];
+        keySpeedMultiplier = currentPreset[4];
+        edgeScrollSpeedMultiplier = currentPreset[5];
+        continuousRotationSpeedMultiplier = currentPreset[6];
+        pulseRotationSpeedMultiplier = currentPreset[7];
+        Debug.Log($"B :{currentPreset[7]}");
+                zoomSpeedMultiplier = currentPreset[8];
+
     }
 
     private void Update()
