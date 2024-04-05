@@ -12,14 +12,14 @@ public class CL_Task : MonoBehaviour
 
     // Speceific data
     public float whichStep;
-    public object[] Objectives;
+    public object[] objectives;
     public delegate bool[] Method();
-    public List<Func<bool>> steps = new List<Func<bool>>();
+    public UnityAction<object>[] steps;
 
-    public void SetData(float _inatePriority, DT_TaskTypes.tasksType _type, List<Func<bool>> _steps)
+    public void SetData(float _inatePriority, DT_TaskTypes.tasksType _type, UnityAction<object>[] _steps)
     {
         type = _type;
         inatePriority = _inatePriority;
-        this.steps = _steps;
+        steps = _steps;
     }
 }

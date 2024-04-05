@@ -10,7 +10,6 @@ public class SO_Task : ScriptableObject
     public int ID;
     public DT_TaskTypes.tasksType type;
     [Range(0, 10)] public float inatePriority; // 0 = low priority   10 = high priority
-    public List<Func<bool>> steps = new List<Func<bool>>();
-
+    public int[] whichSteps;
 }
 

@@ -6,31 +6,53 @@ using UnityEngine.Events;
 public class TaskCreator : MonoBehaviour
 {
     [SerializeField] private SO_Task[] allTasks;
+    [SerializeField] private DT_Actions allActions;
 
     private void Awake()
     {
         allTasks = Resources.LoadAll<SO_Task>("");
         //tidy tasks by ID inside the array
     }
-    public CL_Task createTask(int ID)
-    {
-        CL_Task task = new CL_Task();
-
-        task.SetData(allTasks[ID].inatePriority, allTasks[ID].type, allTasks[ID].steps);
-
-        return task;
-    }
 
     private void Start()
     {
         CL_Task task;
         task = createTask(0);
-        task.steps[0].Invoke();
+        Debug.Log(task);
     }
 
-    public bool printed(string OUI = "aaa")
+    public CL_Task createTask(int wichTask = 0)
     {
-        Debug.Log("oui");
-        return true;    
+        CL_Task task = new CL_Task();
+
+        // convert SO ID to step List
+        UnityAction<object>[] steps = setSteps(allTasks[wichTask]);
+        Debug.Log("test A " + steps.Length);
+
+        // set task of the data according to the selected Task
+        task.SetData(allTasks[wichTask].inatePriority, allTasks[wichTask].type, steps);
+
+        return task;
     }
+
+
+    /// <summary>
+    /// convert all Int ID in the scriptable object Task 
+    /// in to a list of step/method/action
+    /// used to assigned them to a Task object
+    /// </summary>
+    /// <param name="taskData"></param>
+    /// <returns></returns>
+    public UnityAction<object>[] setSteps(SO_Task taskData)
+    {
+        List<UnityAction<object>> allNeededMethod = new List<UnityAction<object>> { };
+
+        for(int i = 0; i < taskData.whichSteps.Length;i++)
+        {
+            allNeededMethod.Add(allActions.getStep(taskData.whichSteps[i]));
+        }
+        return allNeededMethod.ToArray();
+    }
+
+    
 }
