@@ -36,7 +36,6 @@ public class SY_CameraSystem : MonoBehaviour
     private void Start()
     {
         ApplyStats();
-        Debug.Log($"C :{pulseRotationSpeedMultiplier}");
 
         UpdateCameraBehavior();
     }
@@ -54,7 +53,6 @@ public class SY_CameraSystem : MonoBehaviour
         edgeScrollSpeedMultiplier = currentPreset[5];
         continuousRotationSpeedMultiplier = currentPreset[6];
         pulseRotationSpeedMultiplier = currentPreset[7];
-        Debug.Log($"B :{currentPreset[7]}");
                 zoomSpeedMultiplier = currentPreset[8];
 
     }

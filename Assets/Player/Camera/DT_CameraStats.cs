@@ -42,7 +42,6 @@ public class DT_CameraStats : MonoBehaviour
             zoomSpeedMultiplier
         });
 
-        Debug.Log($"A :{pulseRotationSpeedMultiplier}");
     }
 
     public List<float> getPresset(int index = 0)
