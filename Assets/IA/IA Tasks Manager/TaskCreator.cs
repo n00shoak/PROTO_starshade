@@ -18,9 +18,13 @@ public class TaskCreator : MonoBehaviour
     {
         CL_Task task;
         task = createTask(0);
-        Debug.Log(task);
     }
 
+    /// <summary>
+    /// create task of specifed presset
+    /// </summary>
+    /// <param name="wichTask"></param>
+    /// <returns></returns>
     public CL_Task createTask(int wichTask = 0)
     {
         CL_Task task = new CL_Task();
