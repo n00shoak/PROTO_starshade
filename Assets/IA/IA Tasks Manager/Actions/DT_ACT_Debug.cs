@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DT_ACT_Debug : MonoBehaviour
+public class DT_ACT_Debug : CL_Actions
 {
     public static DT_ACT_Debug instance;
 

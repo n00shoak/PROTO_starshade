@@ -237,7 +237,6 @@ GameObject:
   m_Component:
   - component: {fileID: 311473039}
   - component: {fileID: 311473040}
-  - component: {fileID: 311473041}
   m_Layer: 0
   m_Name: AI_Manager
   m_TagString: Untagged
@@ -273,18 +272,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allTasks: []
---- !u!114 &311473041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311473038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f579c12e45553a48a1c66beaa7d6f19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &452438753
 GameObject:
   m_ObjectHideFlags: 0
