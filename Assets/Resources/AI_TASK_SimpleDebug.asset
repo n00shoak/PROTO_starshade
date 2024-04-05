@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: faa6f6b998f84f64dbd0a2e28ee67a56, type: 3}
-  m_Name: Ia_task
+  m_Name: AI_TASK_SimpleDebug
   m_EditorClassIdentifier: 
   ID: 0
   type: 0
   inatePriority: 0
-  whichSteps: 000000000000000000000000
+  whichSteps: 00000000

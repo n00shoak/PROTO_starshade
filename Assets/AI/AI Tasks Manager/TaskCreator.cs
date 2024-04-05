@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class TaskCreator : MonoBehaviour
 {
+    [SerializeField] private DT_TaskStorage storage;
     [SerializeField] private SO_Task[] allTasks;
     [SerializeField] private DT_Actions allActions;
 
@@ -14,18 +15,12 @@ public class TaskCreator : MonoBehaviour
         //tidy tasks by ID inside the array
     }
 
-    private void Start()
-    {
-        CL_Task task;
-        task = createTask(0);
-    }
-
     /// <summary>
     /// create task of specifed presset
     /// </summary>
     /// <param name="wichTask"></param>
     /// <returns></returns>
-    public CL_Task createTask(int wichTask = 0)
+    public void createTask(int wichTask = 0)
     {
         CL_Task task = new CL_Task();
 
@@ -36,7 +31,7 @@ public class TaskCreator : MonoBehaviour
         // set task of the data according to the selected Task
         task.SetData(allTasks[wichTask].inatePriority, allTasks[wichTask].type, steps);
 
-        return task;
+        storage.AddToList(task);
     }
 
 

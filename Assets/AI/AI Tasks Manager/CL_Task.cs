@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public class CL_Task : MonoBehaviour
 {
     // General Data
-    private DT_TaskTypes.tasksType type;
-    private float inatePriority; // 0 = low priority   10 = high priority
+    public DT_TaskTypes.tasksType type;
+    public float inatePriority; // 0 = low priority   10 = high priority
 
     // Speceific data
     public float whichStep;
