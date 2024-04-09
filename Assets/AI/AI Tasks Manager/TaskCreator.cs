@@ -31,7 +31,7 @@ public class TaskCreator : MonoBehaviour
         CL_Task task = new CL_Task();
 
         // convert SO ID to step List
-        UnityAction<object>[] steps = setSteps(allTasks[wichTask]);
+        UnityAction<SY_AI_TaskExecuter, object>[] steps = setSteps(allTasks[wichTask]);
 
         // set task of the data according to the selected Task
         task.SetData(allTasks[wichTask].inatePriority, allTasks[wichTask].type, steps);
@@ -47,9 +47,9 @@ public class TaskCreator : MonoBehaviour
     /// </summary>
     /// <param name="taskData"></param>
     /// <returns></returns>
-    public UnityAction<object>[] setSteps(SO_Task taskData)
+    public UnityAction<SY_AI_TaskExecuter, object>[] setSteps(SO_Task taskData)
     {
-        List<UnityAction<object>> allNeededMethod = new List<UnityAction<object>> { };
+        List<UnityAction<SY_AI_TaskExecuter, object>> allNeededMethod = new List<UnityAction<SY_AI_TaskExecuter, object>> { };
 
         for(int i = 0; i < taskData.whichSteps.Length;i++)
         {

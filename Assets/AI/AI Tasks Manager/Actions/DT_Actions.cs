@@ -16,7 +16,7 @@ public class DT_Actions : MonoBehaviour
         else { Destroy(gameObject); return; }
     }
 
-    public UnityAction<object> getStep(int ID)
+    public UnityAction<SY_AI_TaskExecuter, object> getStep(int ID)
     {
         if(ID <= debug.debugSteps.Length)
         {

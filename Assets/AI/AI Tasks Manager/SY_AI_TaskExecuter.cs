@@ -6,6 +6,9 @@ public class SY_AI_TaskExecuter : MonoBehaviour
 {
     private DT_TaskStorage availableTasks;
     private CL_Task taskInProgress;
+    public int CurrentStep;   
+
+    private bool doing;
 
     private void Awake()
     {
@@ -14,6 +17,7 @@ public class SY_AI_TaskExecuter : MonoBehaviour
 
     private void Start()
     {
+
         getTask();
     }
 
@@ -25,9 +29,10 @@ public class SY_AI_TaskExecuter : MonoBehaviour
 
     private void Update()
     {
-        if(taskInProgress != null)
+        if(taskInProgress != null && !doing)
         {
-            taskInProgress.steps[0].Invoke("");
+            if(CurrentStep > taskInProgress.steps.Length-1) { doing = true; return; }
+            taskInProgress.steps[CurrentStep].Invoke(this,"executing step number " + CurrentStep);
         }
     
     }

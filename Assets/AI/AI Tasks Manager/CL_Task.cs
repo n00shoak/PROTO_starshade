@@ -14,9 +14,9 @@ public class CL_Task
     public float whichStep;
     public object[] objectives;
     public delegate bool[] Method();
-    public UnityAction<object>[] steps;
+    public UnityAction<SY_AI_TaskExecuter,object>[] steps;
 
-    public void SetData(float _inatePriority, DT_TaskTypes.tasksType _type, UnityAction<object>[] _steps)
+    public void SetData(float _inatePriority, DT_TaskTypes.tasksType _type, UnityAction<SY_AI_TaskExecuter,object>[] _steps)
     {
         type = _type;
         inatePriority = _inatePriority;
