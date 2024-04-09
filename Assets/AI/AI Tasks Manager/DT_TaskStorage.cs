@@ -71,7 +71,7 @@ public class DT_TaskStorage : MonoBehaviour
             }
         }
 
-        DebugAvailableTask();
+        //DebugAvailableTask();
     }
 
     public void DebugAvailableTask()

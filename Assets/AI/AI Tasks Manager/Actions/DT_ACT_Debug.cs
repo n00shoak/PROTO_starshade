@@ -22,5 +22,6 @@ public class DT_ACT_Debug : CL_Actions
     public void SimpleDebug(object text)
     {
         Debug.Log(text);
+
     }
 }
