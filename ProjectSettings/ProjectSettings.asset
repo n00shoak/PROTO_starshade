@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 2892688ceee0465499ffff0cd578bbbf
+  productGUID: cdfbf4bb7f61d9748af800f59c0cf684
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: StarShadeProto
+  productName: Star Shade
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -673,14 +673,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: StarShadeProto
+  metroPackageName: Star Shade
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: StarShadeProto
+  metroApplicationDescription: Star Shade
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -749,10 +749,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: e81251af-f90c-4f82-874b-e04759a6630d
+  cloudProjectId: 04d383c3-fa7b-44f1-882d-6341c5ea24e4
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: StarShadeProto
+  projectName: Star Shade
   organizationId: baptout
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
